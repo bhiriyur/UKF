@@ -10,30 +10,30 @@ class UKF {
 public:
 
 
-  /**
-	 * Constructor
-	 */
-	UKF();
+    /**
+       * Constructor
+       */
+    UKF();
 
-	/**
-	 * Destructor
-	 */
-	virtual ~UKF();
+    /**
+     * Destructor
+     */
+    virtual ~UKF();
 
-	/**
-	 * Init Initializes Unscented Kalman filter
-	 */
-	void Init();
+    /**
+     * Init Initializes Unscented Kalman filter
+     */
+    void Init();
 
-  /**
-   * Student assignment functions
-   */
-  void GenerateSigmaPoints(MatrixXd* Xsig_out);
-  void AugmentedSigmaPoints(MatrixXd* Xsig_out);
-  void SigmaPointPrediction(MatrixXd* Xsig_out);
-  void PredictMeanAndCovariance(VectorXd* x_pred, MatrixXd* P_pred);
-  void PredictRadarMeasurement(VectorXd* z_out, MatrixXd* S_out);
-  void UpdateState(VectorXd* x_out, MatrixXd* P_out);
+    /**
+     * Student assignment functions
+     */
+    void GenerateSigmaPoints(MatrixXd* Xsig_out);
+    void AugmentedSigmaPoints(MatrixXd* Xsig_out);
+    void SigmaPointPrediction(MatrixXd* Xsig_out);
+    void PredictMeanAndCovariance(VectorXd* x_pred, MatrixXd* P_pred);
+    void PredictRadarMeasurement(VectorXd* z_out, MatrixXd* S_out);
+    void UpdateState(VectorXd* x_out, MatrixXd* P_out);
 
 };
 
