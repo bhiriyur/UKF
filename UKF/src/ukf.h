@@ -33,7 +33,7 @@ public:
     MatrixXd Xsig_pred_;
 
     ///* time when the state is true, in us
-    long long time_us_;
+    long long previous_timestamp_;
 
     ///* Process noise standard deviation longitudinal acceleration in m/s^2
     double std_a_;
@@ -65,6 +65,9 @@ public:
     ///* Augmented state dimension
     int n_aug_;
 
+    ///* Number of augmented sigma points
+    int n_sigma_;
+
     ///* Sigma point spreading parameter
     double lambda_;
 
@@ -95,7 +98,7 @@ public:
      * matrix
      * @param delta_t Time between k and k+1 in s
      */
-    void Prediction(double delta_t);
+    void Prediction();
 
     /**
      * Updates the state and the state covariance matrix using a laser measurement
@@ -109,12 +112,23 @@ public:
      */
     void UpdateRadar(MeasurementPackage meas_package);
 
-    void GenerateSigmaPoints(MatrixXd* Xsig_out);
-    void AugmentedSigmaPoints(MatrixXd* Xsig_out);
-    void SigmaPointPrediction(double delta_t, MatrixXd* Xsig_aug);
-    void PredictMeanAndCovariance(VectorXd* x_out, MatrixXd* P_out);
-    void PredictRadarMeasurement(VectorXd* z_out, MatrixXd* S_out);
-    void UpdateStateRadar(MatrixXd Zsig, VectorXd z_pred, VectorXd z, MatrixXd S);
+    void AugmentedSigmaPoints();
+    void SigmaPointPrediction();
+    void PredictMeanAndCovariance();
+    void PredictRadarMeasurement();
+    void UpdateStateRadar(VectorXd z);
+
+    void PredictLidarMeasurement();
+    void UpdateStateLidar(VectorXd z);
+
+    double normalize_angle(double val);
+
+    double delta_t;
+    MatrixXd Zsig_;
+    VectorXd z_pred_;
+    MatrixXd S_;
+
+    bool DEBUG;
 
 };
 

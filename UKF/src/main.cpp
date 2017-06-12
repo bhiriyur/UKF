@@ -89,8 +89,8 @@ int main(int argc, char* argv[]) {
       // read measurements at this timestamp
       meas_package.sensor_type_ = MeasurementPackage::LASER;
       meas_package.raw_measurements_ = VectorXd(2);
-      float px;
-      float py;
+      double px;
+      double py;
       iss >> px;
       iss >> py;
       meas_package.raw_measurements_ << px, py;
@@ -103,9 +103,9 @@ int main(int argc, char* argv[]) {
       // read measurements at this timestamp
       meas_package.sensor_type_ = MeasurementPackage::RADAR;
       meas_package.raw_measurements_ = VectorXd(3);
-      float ro;
-      float phi;
-      float ro_dot;
+      double ro;
+      double phi;
+      double ro_dot;
       iss >> ro;
       iss >> phi;
       iss >> ro_dot;
@@ -116,10 +116,10 @@ int main(int argc, char* argv[]) {
     }
 
       // read ground truth data to compare later
-      float x_gt;
-      float y_gt;
-      float vx_gt;
-      float vy_gt;
+      double x_gt;
+      double y_gt;
+      double vx_gt;
+      double vy_gt;
       iss >> x_gt;
       iss >> y_gt;
       iss >> vx_gt;
@@ -192,8 +192,8 @@ int main(int argc, char* argv[]) {
       out_file_ << ukf.NIS_radar_ << "\t";
 
       // output radar measurement in cartesian coordinates
-      float ro = measurement_pack_list[k].raw_measurements_(0);
-      float phi = measurement_pack_list[k].raw_measurements_(1);
+      double ro = measurement_pack_list[k].raw_measurements_(0);
+      double phi = measurement_pack_list[k].raw_measurements_(1);
       out_file_ << ro * cos(phi) << "\t"; // px measurement
       out_file_ << ro * sin(phi) << "\t"; // py measurement
     }
@@ -207,10 +207,10 @@ int main(int argc, char* argv[]) {
     // convert ukf x vector to cartesian to compare to ground truth
     VectorXd ukf_x_cartesian_ = VectorXd(4);
 
-    float x_estimate_ = ukf.x_(0);
-    float y_estimate_ = ukf.x_(1);
-    float vx_estimate_ = ukf.x_(2) * cos(ukf.x_(3));
-    float vy_estimate_ = ukf.x_(2) * sin(ukf.x_(3));
+    double x_estimate_ = ukf.x_(0);
+    double y_estimate_ = ukf.x_(1);
+    double vx_estimate_ = ukf.x_(2) * cos(ukf.x_(3));
+    double vy_estimate_ = ukf.x_(2) * sin(ukf.x_(3));
     
     ukf_x_cartesian_ << x_estimate_, y_estimate_, vx_estimate_, vy_estimate_;
     

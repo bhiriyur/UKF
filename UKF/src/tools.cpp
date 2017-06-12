@@ -11,13 +11,6 @@ Tools::~Tools() {}
 
 VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
                               const vector<VectorXd> &ground_truth) {
-  /**
-  TODO:
-    * Calculate the RMSE here.
-  */
-  /**
-    * Calculate the RMSE here.
-  */
 
   // Input validation
   assert(estimations.size()>0);
@@ -36,8 +29,8 @@ VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
     //std::cout << "ESTIMATIONS: " << estimations[i] << std::endl;
     //std::cout << "diff: " << diff << std::endl;
     rmse += diff;
-    float check = rmse(1) / estimations.size();
-    // std::cout << sqrt(check) << std::endl;
+    //float check = rmse(1) / estimations.size();
+    //std::cout << sqrt(check) << std::endl;
   }
 
   //calculate the mean
